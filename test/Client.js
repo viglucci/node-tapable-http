@@ -5,11 +5,11 @@ const SimpleAuthPlugin = require('../plugins/SimpleAuthPlugin');
 
 describe('Client', () => {
 
-    it('calls the before hook', async function () {
+    it('decorates the request with an authorization header', async function () {
         nock('http://example.com', {
                 reqheaders: {
                     authorization: 'SOME_PASSWORD',
-                },
+                }
             })
             .get('/example-endpoint')
             .reply(200, {
@@ -22,8 +22,10 @@ describe('Client', () => {
             ]
         });
 
-        await client.get('http://example.com/example-endpoint');
+        const response = await client.get('http://example.com/example-endpoint');
+        const {foo} = await response.json();
 
+        expect(foo).to.equal('bar');
         expect(nock.isDone(), 'Expected all nock interceptors to have been called.').to.be.true;
     });
 });
