@@ -1,8 +1,3 @@
-# node-tapable-http
-Example HTTP client for Node leveraging tapable to support plugins.
-
-
-```js
 const nock = require('nock');
 const {expect} = require('chai');
 const Client = require('../Client');
@@ -32,5 +27,3 @@ describe('Client', () => {
         expect(nock.isDone(), 'Expected all nock interceptors to have been called.').to.be.true;
     });
 });
-
-```
