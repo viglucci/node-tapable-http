@@ -26,15 +26,15 @@ class Client {
         let response;
 
         if (this.hooks.before.isUsed()) {
-            let beforeRes = this.hooks.before.call(options);
-            if (beforeRes[0] && typeof beforeRes[0] === 'object') {
-                options = beforeRes[0];
+            let beforeResult = this.hooks.before.call(options);
+            if (beforeResult[0] && typeof beforeResult[0] === 'object') {
+                options = beforeResult[0];
             }
         }
 
         if (this.hooks.get.before.isUsed()) {
-            let beforeGetRes = await this.hooks.get.before.promise(options);
-            response = beforeGetRes[1];
+            let beforeGetResult = await this.hooks.get.before.promise(options);
+            response = beforeGetResult[1];
         }
 
         if (!response) {
