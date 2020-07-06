@@ -2,11 +2,16 @@ const nock = require('nock');
 const {expect} = require('chai');
 const Client = require('../Client');
 const StaleLruCachePlugin = require('../plugins/StaleLruCachePlugin');
+const SimpleAuthPlugin = require('../plugins/SimpleAuthPlugin');
 
 describe('StaleLruCachePlugin', () => {
 
     it('returns the cached value on subsequent requests', async function () {
-        nock('http://example.com')
+        nock('http://example.com', {
+                reqheaders: {
+                    authorization: 'SOME_PASSWORD',
+                }
+            })
             .get('/example-endpoint')
             .reply(200, {
                 foo: 'bar'
@@ -14,6 +19,7 @@ describe('StaleLruCachePlugin', () => {
 
         const client = new Client({
             plugins: [
+                new SimpleAuthPlugin('SOME_PASSWORD'),
                 new StaleLruCachePlugin()
             ]
         });
