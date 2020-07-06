@@ -6,10 +6,14 @@ class SimpleAuthPlugin {
 
     apply(hooks) {
         hooks.before.tap('SimpleAuthPlugin', (options) => {
-            options.headers = {
-                ...(options.headers || {}),
-                authorization: this.password
-            };
+            const res = [{
+                ...options,
+                headers: {
+                    ...(options.headers || {}),
+                    authorization: this.password || ""
+                }
+            }];
+            return res;
         });
     }
 }

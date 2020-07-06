@@ -3,7 +3,7 @@ const {expect} = require('chai');
 const Client = require('../Client');
 const SimpleAuthPlugin = require('../plugins/SimpleAuthPlugin');
 
-describe('Client', () => {
+describe('SimpleAuthPlugin', () => {
 
     it('decorates the request with an authorization header', async function () {
         nock('http://example.com', {
