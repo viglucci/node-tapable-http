@@ -3,9 +3,8 @@ const {SyncWaterfallHook, AsyncSeriesWaterfallHook, MultiHook} = require('tapabl
 
 class Client {
     constructor({plugins}) {
-        const beforeHook = new SyncWaterfallHook(['options']);
         this.hooks = {
-            before: beforeHook,
+            before: new SyncWaterfallHook(['options']),
             get: {
                 before: new AsyncSeriesWaterfallHook(['url', 'options']),
                 after: new AsyncSeriesWaterfallHook(['url', 'options', 'response'])
