@@ -11,15 +11,19 @@ class StaleLruCachePlugin {
     }
 
     apply(hooks) {
-        hooks.get.before.tapPromise('StaleLruCachePlugin', async (url, options) => {
+
+        hooks.get.before.tapPromise('StaleLruCachePlugin', async (options) => {
+            const url = options.url;
             if (this.cache.has(url)) {
-                return this.cache.get(url);
+                const response = this.cache.get(url);
+                return [options, response.clone()];
             }
-            return null;
+            return [options];
         });
+
         hooks.get.after.tapPromise('StaleLruCachePlugin', async (url, options, response) => {
             this.cache.set(url, response.clone());
-            return response;
+            return [options, response.clone()];
         });
     }
 }
