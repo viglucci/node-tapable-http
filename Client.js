@@ -38,10 +38,10 @@ class Client {
         }
 
         if (!response) {
-            const {url: reqUrl, ...rest} = options;
-            response = await fetch(reqUrl, rest);
+            const {url: reqUrl, ...otherOpts} = options;
+            response = await fetch(reqUrl, otherOpts);
             if (this.hooks.get.after.isUsed()) {
-                let afterResult = await this.hooks.get.after.promise(url, rest, response.clone());
+                let afterResult = await this.hooks.get.after.promise(url, otherOpts, response.clone());
                 response = afterResult[1];
             }
         }
