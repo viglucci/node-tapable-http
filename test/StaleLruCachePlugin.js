@@ -3,16 +3,14 @@ const {expect} = require('chai');
 const Client = require('../Client');
 const StaleLruCachePlugin = require('../plugins/StaleLruCachePlugin');
 
-describe('StaleLruCachePlugin', () => {
+describe.only('StaleLruCachePlugin', () => {
 
     it('returns the cached value on subsequent requests', async function () {
         nock('http://example.com')
             .get('/example-endpoint')
             .reply(200, {
                 foo: 'bar'
-            });
-   
-        nock('http://example.com')
+            })
             .get('/example-endpoint')
             .reply(200, {
                 foo: 'bar 2'
