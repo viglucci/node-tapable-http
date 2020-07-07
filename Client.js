@@ -12,7 +12,7 @@ class Client {
         };
         if (plugins) {
             plugins.forEach(plugin => {
-                plugin.apply(this.hooks);
+                plugin.apply(this);
             });
         }
     }

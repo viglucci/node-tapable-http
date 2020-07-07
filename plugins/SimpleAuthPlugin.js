@@ -4,8 +4,8 @@ class SimpleAuthPlugin {
         this.password = password;
     }
 
-    apply(hooks) {
-        hooks.before.tap('SimpleAuthPlugin', (options) => {
+    apply(client) {
+        client.hooks.before.tap('SimpleAuthPlugin', (options) => {
             const res = [{
                 ...options,
                 headers: {

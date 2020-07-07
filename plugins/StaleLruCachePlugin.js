@@ -10,9 +10,8 @@ class StaleLruCachePlugin {
         });
     }
 
-    apply(hooks) {
-
-        hooks.get.before.tapPromise('StaleLruCachePlugin', async (options) => {
+    apply(client) {
+        client.hooks.get.before.tapPromise('StaleLruCachePlugin', async (options) => {
             const url = options.url;
             if (this.cache.has(url)) {
                 const response = this.cache.get(url);
@@ -21,7 +20,7 @@ class StaleLruCachePlugin {
             return [options];
         });
 
-        hooks.get.after.tapPromise('StaleLruCachePlugin', async (url, options, response) => {
+        client.hooks.get.after.tapPromise('StaleLruCachePlugin', async (url, options, response) => {
             this.cache.set(url, response.clone());
             return [options, response.clone()];
         });
