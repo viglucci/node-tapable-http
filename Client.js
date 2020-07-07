@@ -20,7 +20,7 @@ class Client {
     async get(url, options) {
         options = options || {};
         options.url = url;
-        options.method = options.method || 'GET';
+        options.method = 'GET';
 
         let response;
 
