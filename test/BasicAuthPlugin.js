@@ -1,14 +1,14 @@
 const nock = require('nock');
 const {expect} = require('chai');
 const Client = require('../Client');
-const SimpleAuthPlugin = require('../plugins/SimpleAuthPlugin');
+const BasicAuthPlugin = require('../plugins/BasicAuthPlugin');
 
-describe('SimpleAuthPlugin', () => {
+describe('BasicAuthPlugin', () => {
 
     it('decorates the request with an authorization header', async function () {
         nock('http://example.com', {
                 reqheaders: {
-                    authorization: 'SOME_PASSWORD',
+                    authorization: 'Basic dXNlcjpwYXNzd29yZDEyMzQ=',
                 }
             })
             .get('/example-endpoint')
@@ -18,7 +18,10 @@ describe('SimpleAuthPlugin', () => {
 
         const client = new Client({
             plugins: [
-                new SimpleAuthPlugin('SOME_PASSWORD')
+                new BasicAuthPlugin({
+                    username: 'user',
+                    password: 'password1234'
+                })
             ]
         });
 
