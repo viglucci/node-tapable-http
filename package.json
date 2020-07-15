@@ -18,11 +18,13 @@
   "homepage": "https://github.com/viglucci/node-tapable-http#readme",
   "dependencies": {
     "node-fetch": "^2.6.0",
+    "simple-oauth2": "^4.1.0",
     "stale-lru-cache": "^5.1.1",
     "tapable": "^1.1.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "lodash": "^4.17.19",
     "mocha": "^8.0.1",
     "nock": "^13.0.2"
   }
