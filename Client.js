@@ -4,7 +4,7 @@ const {SyncWaterfallHook, AsyncSeriesWaterfallHook, MultiHook} = require('tapabl
 class Client {
     constructor({plugins}) {
         this.hooks = {
-            before: new SyncWaterfallHook(['options']),
+            before: new AsyncSeriesWaterfallHook(['options']),
             get: {
                 before: new AsyncSeriesWaterfallHook(['url', 'options']),
                 after: new AsyncSeriesWaterfallHook(['url', 'options', 'response'])
@@ -25,7 +25,7 @@ class Client {
         let response;
 
         if (this.hooks.before.isUsed()) {
-            let beforeResult = this.hooks.before.call(options);
+            let beforeResult = await this.hooks.before.promise(options);
             if (beforeResult[0] && typeof beforeResult[0] === 'object') {
                 options = beforeResult[0];
             }
