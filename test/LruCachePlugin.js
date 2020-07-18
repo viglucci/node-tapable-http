@@ -6,7 +6,7 @@ const LruCachePlugin = require('../plugins/LruCachePlugin');
 describe('LruCachePlugin', () => {
 
     it('returns the cached value on subsequent requests', async function () {
-        nock('http://example.com')
+        const scope = nock('http://example.com')
             .get('/example-endpoint')
             .reply(200, {
                 foo: 'bar'
@@ -33,6 +33,6 @@ describe('LruCachePlugin', () => {
         const {foo: foo3} = await response3.json();
         expect(foo3).to.equal('bar');
 
-        expect(nock.isDone(), 'Expected all nock interceptors to have been called.').to.be.true;
+        expect(scope.isDone(), 'Expected all nock interceptors to have been called.').to.be.true;
     });
 });

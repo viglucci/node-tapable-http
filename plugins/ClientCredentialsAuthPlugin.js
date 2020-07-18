@@ -23,7 +23,7 @@ class ClientCredentialsAuthPlugin {
     }
 
     apply(client) {
-        client.hooks.before.tapPromise('ClientCredentialsAuthPlugin', (options) => {
+        client.hooks.before.tapPromise('ClientCredentialsAuthPlugin', async (options) => {
             if (this.accessToken && !this.accessToken.expired()) {
                 return [{
                     ...options,

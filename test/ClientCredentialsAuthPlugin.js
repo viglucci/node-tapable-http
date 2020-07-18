@@ -13,7 +13,7 @@ describe('ClientCredentialsAuthPlugin', () => {
         const CLIENT_CREDS_BASIC_AUTH_VALUE = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
         // interceptor for oauth token request
-        nock('http://oauth.example.com', {
+        const scope = nock('http://oauth.example.com', {
                 reqheaders: {
                     accept: 'application/json',
                     authorization: `Basic ${CLIENT_CREDS_BASIC_AUTH_VALUE}`,
@@ -61,6 +61,6 @@ describe('ClientCredentialsAuthPlugin', () => {
         const {foo} = await response.json();
 
         expect(foo).to.equal('bar');
-        expect(nock.isDone(), 'Expected all nock interceptors to have been called.').to.be.true;
+        expect(scope.isDone(), 'Expected all nock interceptors to have been called.').to.be.true;
     });
 });
