@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const {SyncWaterfallHook, AsyncSeriesWaterfallHook, MultiHook} = require('tapable');
+const {AsyncSeriesWaterfallHook} = require('tapable');
 
 class Client {
     constructor({plugins}) {
@@ -41,7 +41,9 @@ class Client {
             response = await fetch(reqUrl, otherOpts);
             if (this.hooks.get.after.isUsed()) {
                 let afterResult = await this.hooks.get.after.promise(url, otherOpts, response.clone());
-                response = afterResult[1];
+                if (Array.isArray(afterResult)) {
+                    response = afterResult[1];
+                }
             }
         }
 
