@@ -6,7 +6,7 @@ const BasicAuthPlugin = require('../plugins/BasicAuthPlugin');
 describe('BasicAuthPlugin', () => {
 
     it('decorates the request with an authorization header', async function () {
-        nock('http://example.com', {
+        const scope = nock('http://example.com', {
                 reqheaders: {
                     authorization: 'Basic dXNlcjpwYXNzd29yZDEyMzQ=',
                 }
@@ -29,6 +29,6 @@ describe('BasicAuthPlugin', () => {
         const {foo} = await response.json();
 
         expect(foo).to.equal('bar');
-        expect(nock.isDone(), 'Expected all nock interceptors to have been called.').to.be.true;
+        expect(scope.isDone(), 'Expected all nock interceptors to have been called.').to.be.true;
     });
 });
