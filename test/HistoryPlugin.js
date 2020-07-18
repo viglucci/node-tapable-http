@@ -24,8 +24,8 @@ describe('HistoryPlugin', () => {
             ]
         });
 
-        const response = await (await client.get('http://example.com/example-endpoint')).json();
-        const response2 = await (await client.get('http://example.com/example-endpoint-1')).json();
+        const response = await client.get('http://example.com/example-endpoint').json();
+        const response2 = await client.get('http://example.com/example-endpoint-1').json();
 
         expect(historyContainer.length).to.equal(2);
 
