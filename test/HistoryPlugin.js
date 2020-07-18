@@ -29,8 +29,8 @@ describe('HistoryPlugin', () => {
 
         expect(historyContainer.length).to.equal(2);
 
-        expect((await (historyContainer[0].responseClone).json()).foo).to.equal(response.foo);
-        expect((await (historyContainer[1].responseClone).json()).foo).to.equal(response2.foo);
+        expect((await historyContainer[0].json()).foo).to.equal(response.foo);
+        expect((await historyContainer[1].json()).foo).to.equal(response2.foo);
 
         expect(scope.isDone(), 'Expected all nock interceptors to have been called.').to.be.true;
     });
