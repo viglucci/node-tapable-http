@@ -17,7 +17,7 @@ describe('ClientCredentialsAuthPlugin', () => {
                 reqheaders: {
                     accept: 'application/json',
                     authorization: `Basic ${CLIENT_CREDS_BASIC_AUTH_VALUE}`,
-                    "content-type": "application/json",
+                    'content-type': 'application/json',
                 }
             })
             .post('/token', _.matches({
@@ -52,7 +52,7 @@ describe('ClientCredentialsAuthPlugin', () => {
                         id: '01234',
                         secret: '56789'
                     },
-                    scope: "scopeA,scopeB"
+                    scope: 'scopeA,scopeB'
                 })
             ]
         });
