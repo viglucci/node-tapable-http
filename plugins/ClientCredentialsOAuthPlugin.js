@@ -1,6 +1,6 @@
 const { ClientCredentials } = require('simple-oauth2');
 
-class ClientCredentialsAuthPlugin {
+class ClientCredentialsOAuthPlugin {
 
     constructor({
         auth = {},
@@ -23,7 +23,7 @@ class ClientCredentialsAuthPlugin {
     }
 
     apply(client) {
-        client.hooks.before.tapPromise('ClientCredentialsAuthPlugin', async (options) => {
+        client.hooks.before.tapPromise('ClientCredentialsOAuthPlugin', async (options) => {
             if (this.accessToken && !this.accessToken.expired()) {
                 return [{
                     ...options,
@@ -48,4 +48,4 @@ class ClientCredentialsAuthPlugin {
     }
 }
 
-module.exports = ClientCredentialsAuthPlugin;
+module.exports = ClientCredentialsOAuthPlugin;

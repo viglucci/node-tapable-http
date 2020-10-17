@@ -2,7 +2,7 @@ const nock = require('nock');
 const {expect} = require('chai');
 const _ = require('lodash');
 const Client = require('../Client');
-const ClientCredentialsAuthPlugin = require('../plugins/ClientCredentialsAuthPlugin');
+const ClientCredentialsAuthPlugin = require('../plugins/ClientCredentialsOAuthPlugin');
 
 describe('ClientCredentialsAuthPlugin', () => {
 
